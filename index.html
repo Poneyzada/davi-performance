@@ -13,19 +13,19 @@
                 extend: {
                     colors: {
                         sports: {
-                            bg: '#0a0a0c',        /* Fundo super escuro */
-                            panel: '#121217',     /* Painéis laterais */
-                            blue: '#001b79',      /* Azul Profundo da Logo */
-                            lightBlue: '#3b82f6', /* Azul destaque (Neon) */
-                            gray: '#8f93a2'       /* Texto secundário */
+                            bg: '#050508',        /* Fundo Super Escuro */
+                            panel: '#0a0a0f',     /* Painéis */
+                            blue: '#00008B',      /* Azul Profundo da Logo */
+                            lightBlue: '#2563eb', /* Azul Destaque (Neon) */
+                            gray: '#8f93a2'       /* Texto Secundário */
                         }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                        heading: ['Montserrat', 'sans-serif'], /* Fonte pesada para esportes */
+                        heading: ['Montserrat', 'sans-serif'], /* Fonte pesada Esportiva */
                     },
                     backgroundImage: {
-                        'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+                        'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.04%22/%3E%3C/svg%3E')",
                     }
                 }
             }
@@ -33,286 +33,281 @@
     </script>
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:ital,wght@0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
     
     <style>
-        body { background-color: #0a0a0c; color: #ffffff; overflow-x: hidden; }
+        body { background-color: #050508; color: #ffffff; overflow-x: hidden; }
         
-        /* Ocultar barra de rolagem para design limpo */
+        /* Ocultar scrollbar */
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0a0a0c; }
-        ::-webkit-scrollbar-thumb { background: #001b79; border-radius: 10px; }
-
-        .sidebar-icon { transition: all 0.3s ease; cursor: pointer; color: #8f93a2; }
-        .sidebar-icon:hover { color: #3b82f6; transform: scale(1.1); }
+        ::-webkit-scrollbar-track { background: #050508; }
+        ::-webkit-scrollbar-thumb { background: #00008B; border-radius: 10px; }
 
         .service-card {
-            background: linear-gradient(145deg, rgba(18, 18, 23, 0.9) 0%, rgba(10, 10, 12, 1) 100%);
+            background: linear-gradient(145deg, rgba(15, 15, 20, 0.9) 0%, rgba(5, 5, 8, 1) 100%);
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.4s ease;
         }
         .service-card:hover {
-            border-color: #3b82f6;
+            border-color: #2563eb;
             transform: translateY(-5px);
-            box-shadow: 0 10px 40px -10px rgba(59, 130, 246, 0.2);
+            box-shadow: 0 10px 40px -10px rgba(37, 99, 235, 0.15);
         }
 
-        /* Modal Styles */
+        /* Modal */
         #modal-backdrop { transition: opacity 0.3s ease; }
         #modal-panel { transition: all 0.3s ease; transform: scale(0.95); opacity: 0; }
         .modal-active #modal-panel { transform: scale(1); opacity: 1; }
+        
+        .marquee-content { display: flex; width: max-content; gap: 4rem; animation: marquee 30s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
     </style>
 </head>
-<body class="flex h-screen antialiased bg-noise bg-sports-bg">
+<body class="antialiased bg-noise bg-sports-bg min-h-screen flex flex-col">
 
-    <!-- SIDEBAR (Reference: Left dark menu) -->
-    <aside class="hidden md:flex flex-col w-24 border-r border-white/5 bg-sports-panel h-full fixed left-0 top-0 z-40 items-center py-8 justify-between">
-        <!-- Logo Icon (Abstract Person) -->
-        <div class="text-sports-lightBlue">
-            <svg width="40" height="40" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="25" r="12" />
-                <path d="M20 60 C30 50, 45 45, 50 65 C55 45, 70 50, 80 60 C75 75, 60 85, 50 85 C40 85, 25 75, 20 60 Z" />
-                <path d="M15 85 Q 50 75 85 85" stroke="currentColor" stroke-width="4" fill="none" />
-            </svg>
-        </div>
-
-        <!-- Navigation Dots/Icons -->
-        <div class="flex flex-col gap-10">
-            <a href="#home" class="sidebar-icon flex flex-col items-center gap-2 group">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                <span class="text-[9px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Home</span>
+    <!-- NAVBAR TRANSPARENTE -->
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-md bg-sports-bg/80 border-b border-white/5 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            
+            <!-- Logo Davi Moreira Principal -->
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 flex items-center justify-center bg-white rounded-lg p-1">
+                    <img src="Identidade-Davi-Personal-1202_01 (1).png" alt="Davi Moreira Logo" class="w-full h-full object-contain" onerror="this.outerHTML='<span class=\'text-sports-blue font-black text-xl\'>DM</span>'">
+                </div>
+                <div class="hidden sm:block leading-none">
+                    <span class="block font-heading font-black text-white text-base tracking-tighter uppercase">Davi Moreira</span>
+                    <span class="text-[9px] text-sports-lightBlue tracking-[0.3em] uppercase font-bold">Personal Trainer</span>
+                </div>
+            </div>
+            
+            <!-- Logo Secundária / Instagram -->
+            <a href="https://instagram.com/" target="_blank" class="flex items-center gap-2 px-3 py-2 rounded-lg bg-sports-panel border border-white/10 hover:border-sports-lightBlue/50 transition-all group">
+                <div class="h-6 flex items-center justify-center">
+                    <img src="Identidade-Davi-Personal-1202_05 (1).png" alt="Instagram Davi" class="h-full object-contain" onerror="this.outerHTML='<span class=\'text-xs font-bold text-white uppercase tracking-widest\'>INSTAGRAM</span>'">
+                </div>
             </a>
-            <a href="#services" class="sidebar-icon flex flex-col items-center gap-2 group">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                <span class="text-[9px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Serviços</span>
-            </a>
-        </div>
 
-        <!-- Social -->
-        <div class="text-sports-gray hover:text-white transition-colors cursor-pointer">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/></svg>
-        </div>
-    </aside>
-
-    <!-- MOBILE NAV -->
-    <nav class="md:hidden fixed top-0 w-full bg-sports-panel/90 backdrop-blur border-b border-white/10 z-40 p-4 flex justify-between items-center">
-        <div class="text-white flex items-center gap-2">
-            <svg width="30" height="30" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="25" r="12" /><path d="M20 60 C30 50, 45 45, 50 65 C55 45, 70 50, 80 60 C75 75, 60 85, 50 85 C40 85, 25 75, 20 60 Z" /><path d="M15 85 Q 50 75 85 85" stroke="currentColor" stroke-width="4" fill="none" /></svg>
-            <span class="font-heading font-black italic tracking-tighter text-lg">DAVI MOREIRA</span>
         </div>
     </nav>
 
-    <!-- MAIN CONTENT -->
-    <main class="flex-1 ml-0 md:ml-24 h-full overflow-y-auto relative scroll-smooth">
+    <!-- HERO SECTION -->
+    <main class="relative z-10 flex-grow pt-28 pb-16">
         
-        <!-- HERO SECTION -->
-        <section id="home" class="relative min-h-screen flex items-center pt-20 md:pt-0">
-            <!-- Background Image Darkened -->
-            <div class="absolute inset-0 z-0">
-                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop" alt="Athlete" class="w-full h-full object-cover opacity-30 mix-blend-luminosity grayscale">
-                <div class="absolute inset-0 bg-gradient-to-r from-sports-bg via-sports-bg/90 to-transparent"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-sports-bg via-transparent to-transparent"></div>
-            </div>
+        <!-- Fundo Escuro com Textura e Imagem -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop" alt="Athlete" class="w-full h-full object-cover opacity-20 mix-blend-luminosity grayscale">
+            <div class="absolute inset-0 bg-gradient-to-r from-sports-bg via-sports-bg/95 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-sports-bg via-transparent to-sports-bg/80"></div>
+        </div>
 
-            <div class="relative z-10 w-full max-w-6xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <!-- Text Left -->
-                <div class="space-y-6">
-                    <div class="inline-block border border-sports-lightBlue/30 bg-sports-blue/20 px-3 py-1 text-[10px] font-bold text-sports-lightBlue uppercase tracking-[0.3em]">
-                        Performance Hub
-                    </div>
-                    
-                    <h1 class="font-heading font-black text-5xl md:text-7xl lg:text-8xl italic uppercase leading-[0.9] tracking-tighter">
-                        SLOW PROCESS. <br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-sports-lightBlue to-blue-800">SOLID FOUNDATION.</span>
-                    </h1>
-
-                    <div class="h-[2px] w-20 bg-sports-lightBlue my-6"></div>
-
-                    <p class="text-sports-gray text-lg md:text-xl font-medium max-w-md">
-                        Acompanhamento individualizado e periodização científica para atletas e entusiastas. Eleve suas valências.
-                    </p>
-
-                    <div class="pt-8">
-                        <a href="#services" class="inline-flex items-center gap-3 bg-white text-sports-bg font-heading font-black italic uppercase px-8 py-4 hover:bg-sports-lightBlue hover:text-white transition-colors duration-300">
-                            ESCOLHER TREINAMENTO
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Graphic Right (Brain/Science aesthetic from reference) -->
-                <div class="hidden lg:flex items-center justify-center relative">
-                    <!-- Abstract Anatomy/Performance graphic -->
-                    <div class="absolute w-64 h-64 border border-sports-blue/30 rounded-full animate-[spin_10s_linear_infinite]"></div>
-                    <div class="absolute w-48 h-48 border border-sports-lightBlue/20 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
-                    <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=2069&auto=format&fit=crop" class="w-64 h-64 object-cover rounded-full grayscale opacity-80 mix-blend-screen" alt="Muscle">
-                    
-                    <!-- Floating Data Box -->
-                    <div class="absolute bottom-10 right-0 bg-sports-panel border border-white/10 p-4 backdrop-blur-md">
-                        <p class="text-[10px] text-sports-gray uppercase tracking-widest mb-1">Methodology</p>
-                        <p class="font-heading font-bold text-white text-sm">EVIDENCE BASED</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SERVICES SECTION (The 4 Plans) -->
-        <section id="services" class="relative z-10 py-24 px-6 lg:px-12 max-w-7xl mx-auto">
+        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[70vh]">
             
-            <div class="mb-16 border-l-4 border-sports-lightBlue pl-6">
-                <h2 class="font-heading font-black text-4xl md:text-5xl uppercase italic tracking-tighter">Planos de Ação</h2>
-                <p class="text-sports-gray mt-2">Escolha a sua necessidade atual.</p>
+            <!-- ESQUERDA: COPYWRITING -->
+            <div class="space-y-6">
+                <div class="inline-block border border-sports-lightBlue/30 bg-sports-blue/20 px-3 py-1 text-[10px] font-bold text-sports-lightBlue uppercase tracking-[0.3em]">
+                    Metodologia Elite
+                </div>
+                
+                <h1 class="font-heading font-black text-5xl md:text-7xl lg:text-[5rem] italic uppercase leading-[0.9] tracking-tighter text-white">
+                    SLOW PROCESS. <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-sports-lightBlue to-blue-800">SOLID FOUNDATION.</span>
+                </h1>
+
+                <div class="h-[3px] w-24 bg-sports-lightBlue my-6"></div>
+
+                <p class="text-sports-gray text-lg md:text-xl font-medium max-w-md leading-relaxed">
+                    Esporte é ciência. Performance é engenharia. Acompanhamento individualizado focado em extrair o máximo do seu potencial físico.
+                </p>
+
+                <div class="pt-8 flex flex-col sm:flex-row gap-4">
+                    <a href="#services" class="inline-flex items-center justify-center gap-3 bg-white text-sports-bg font-heading font-black italic uppercase px-8 py-5 hover:bg-sports-lightBlue hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                        ESCOLHER TREINAMENTO
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+
+                <!-- Marquee Animado -->
+                <div class="pt-12 overflow-hidden w-full opacity-20 font-black italic">
+                    <div class="marquee-content">
+                        <span class="text-xl uppercase tracking-[0.2em] whitespace-nowrap">FORÇA • POTÊNCIA • RESISTÊNCIA • PREVENÇÃO • PERFORMANCE •</span>
+                        <span class="text-xl uppercase tracking-[0.2em] whitespace-nowrap">FORÇA • POTÊNCIA • RESISTÊNCIA • PREVENÇÃO • PERFORMANCE •</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIREITA: GRÁFICO (Estilo Tame The Game) -->
+            <div class="hidden lg:flex items-center justify-center relative">
+                <div class="absolute w-[400px] h-[400px] border border-sports-blue/20 rounded-full animate-[spin_20s_linear_infinite]"></div>
+                <div class="absolute w-[250px] h-[250px] border-2 border-dashed border-sports-lightBlue/10 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
+                
+                <!-- Imagem Foco -->
+                <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=2069&auto=format&fit=crop" class="w-[300px] h-[300px] object-cover rounded-full grayscale opacity-70 mix-blend-lighten shadow-[0_0_50px_rgba(0,27,121,0.5)]" alt="Performance">
+                
+                <!-- HUD Flutuante -->
+                <div class="absolute bottom-4 right-10 bg-sports-panel border border-white/10 p-4 backdrop-blur-md shadow-2xl">
+                    <p class="text-[10px] text-sports-gray uppercase tracking-widest mb-1">Status</p>
+                    <p class="font-heading font-black text-white text-sm flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> SYSTEM READY
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- GRID DE SERVIÇOS (OS 4 PLANOS) -->
+    <section id="services" class="relative z-10 py-20 px-6 lg:px-12 bg-sports-bg border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="mb-12 border-l-4 border-sports-lightBlue pl-6">
+                <h2 class="font-heading font-black text-4xl md:text-5xl uppercase italic tracking-tighter text-white">Nossas Especialidades</h2>
+                <p class="text-sports-gray mt-2 font-medium">Selecione o plano ideal para a sua necessidade.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
-                <!-- Card 1 -->
-                <div class="service-card p-8 group flex flex-col justify-between h-full">
+                <!-- 1. ALTO RENDIMENTO -->
+                <div class="service-card p-8 lg:p-10 group flex flex-col justify-between h-full rounded-2xl">
                     <div>
-                        <div class="w-12 h-12 bg-sports-blue/20 rounded flex items-center justify-center mb-6 text-sports-lightBlue">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        <div class="w-14 h-14 bg-sports-blue/30 rounded-xl flex items-center justify-center mb-6 text-sports-lightBlue border border-sports-lightBlue/20">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                         </div>
-                        <h3 class="font-heading font-black text-2xl uppercase italic mb-3">1. Preparação Física de Alto Rendimento</h3>
-                        <span class="inline-block bg-white/10 text-xs px-2 py-1 rounded mb-4 font-mono text-gray-300">PRESENCIAL</span>
-                        <p class="text-sports-gray text-sm leading-relaxed mb-8">
+                        <h3 class="font-heading font-black text-2xl lg:text-3xl uppercase italic mb-3 text-white">Preparação Física de Alto Rendimento</h3>
+                        <span class="inline-block bg-white/10 text-[10px] px-3 py-1 rounded-sm mb-6 font-mono text-gray-300 font-bold tracking-widest">PRESENCIAL</span>
+                        <p class="text-sports-gray text-sm leading-relaxed mb-8 font-medium">
                             Acompanhamento individualizado focado em valências físicas específicas da modalidade do atleta (força, potência, resistência), com foco em performance e prevenção de lesões.
                         </p>
                     </div>
-                    <button onclick="openICP('Preparação Física (Alto Rendimento)')" class="w-full py-4 border border-sports-lightBlue/50 text-sports-lightBlue font-bold uppercase tracking-wider text-sm hover:bg-sports-lightBlue hover:text-white transition-all">
+                    <button onclick="openICP('Preparação Física (Alto Rendimento)')" class="w-full py-4 border-2 border-sports-lightBlue/30 text-sports-lightBlue font-black uppercase tracking-wider text-sm hover:bg-sports-lightBlue hover:text-white transition-all rounded-lg">
                         Aplicar Agora
                     </button>
                 </div>
 
-                <!-- Card 2 -->
-                <div class="service-card p-8 group flex flex-col justify-between h-full">
+                <!-- 2. PERSONAL TRAINER -->
+                <div class="service-card p-8 lg:p-10 group flex flex-col justify-between h-full rounded-2xl">
                     <div>
-                        <div class="w-12 h-12 bg-sports-blue/20 rounded flex items-center justify-center mb-6 text-sports-lightBlue">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        <div class="w-14 h-14 bg-sports-blue/30 rounded-xl flex items-center justify-center mb-6 text-sports-lightBlue border border-sports-lightBlue/20">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                         </div>
-                        <h3 class="font-heading font-black text-2xl uppercase italic mb-3">2. Personal Trainer</h3>
-                        <span class="inline-block bg-white/10 text-xs px-2 py-1 rounded mb-4 font-mono text-gray-300">PRESENCIAL</span>
-                        <p class="text-sports-gray text-sm leading-relaxed mb-8">
+                        <h3 class="font-heading font-black text-2xl lg:text-3xl uppercase italic mb-3 text-white">Personal Trainer Presencial</h3>
+                        <span class="inline-block bg-white/10 text-[10px] px-3 py-1 rounded-sm mb-6 font-mono text-gray-300 font-bold tracking-widest">PRESENCIAL</span>
+                        <p class="text-sports-gray text-sm leading-relaxed mb-8 font-medium">
                             Acompanhamento individualizado durante a execução dos exercícios, garantindo a técnica correta, motivação e segurança para atingir resultados mais rápidos.
                         </p>
                     </div>
-                    <button onclick="openICP('Personal Trainer Presencial')" class="w-full py-4 border border-sports-lightBlue/50 text-sports-lightBlue font-bold uppercase tracking-wider text-sm hover:bg-sports-lightBlue hover:text-white transition-all">
+                    <button onclick="openICP('Personal Trainer Presencial')" class="w-full py-4 border-2 border-sports-lightBlue/30 text-sports-lightBlue font-black uppercase tracking-wider text-sm hover:bg-sports-lightBlue hover:text-white transition-all rounded-lg">
                         Consultar Vagas
                     </button>
                 </div>
 
-                <!-- Card 3 -->
-                <div class="service-card p-8 group flex flex-col justify-between h-full">
+                <!-- 3. REABILITAÇÃO -->
+                <div class="service-card p-8 lg:p-10 group flex flex-col justify-between h-full rounded-2xl">
                     <div>
-                        <div class="w-12 h-12 bg-red-500/10 rounded flex items-center justify-center mb-6 text-red-500">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        <div class="w-14 h-14 bg-red-500/10 rounded-xl flex items-center justify-center mb-6 text-red-500 border border-red-500/20">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                         </div>
-                        <h3 class="font-heading font-black text-2xl uppercase italic mb-3">3. Reabilitação & Return-to-Play</h3>
-                        <span class="inline-block bg-white/10 text-xs px-2 py-1 rounded mb-4 font-mono text-gray-300">CLÍNICO/ESPORTE</span>
-                        <p class="text-sports-gray text-sm leading-relaxed mb-8">
+                        <h3 class="font-heading font-black text-2xl lg:text-3xl uppercase italic mb-3 text-white">Reabilitação & Return-to-Play</h3>
+                        <span class="inline-block bg-white/10 text-[10px] px-3 py-1 rounded-sm mb-6 font-mono text-gray-300 font-bold tracking-widest">CLÍNICO/ESPORTE</span>
+                        <p class="text-sports-gray text-sm leading-relaxed mb-8 font-medium">
                             Serviço especializado para atletas em fase de recuperação de lesão, focando no fortalecimento específico para que o retorno às competições seja seguro e no mais alto nível.
                         </p>
                     </div>
-                    <button onclick="openICP('Reabilitação (Return-to-Play)')" class="w-full py-4 border border-sports-lightBlue/50 text-sports-lightBlue font-bold uppercase tracking-wider text-sm hover:bg-sports-lightBlue hover:text-white transition-all">
+                    <button onclick="openICP('Reabilitação (Return-to-Play)')" class="w-full py-4 border-2 border-sports-lightBlue/30 text-sports-lightBlue font-black uppercase tracking-wider text-sm hover:bg-sports-lightBlue hover:text-white transition-all rounded-lg">
                         Agendar Avaliação
                     </button>
                 </div>
 
-                <!-- Card 4 -->
-                <div class="service-card p-8 group flex flex-col justify-between h-full relative overflow-hidden">
-                    <!-- Detalhe visual de online -->
-                    <div class="absolute top-0 right-0 w-20 h-20 bg-sports-blue blur-[30px] opacity-50"></div>
-                    
+                <!-- 4. CONSULTORIA ONLINE -->
+                <div class="service-card p-8 lg:p-10 group flex flex-col justify-between h-full rounded-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-sports-blue blur-[50px] opacity-40"></div>
                     <div class="relative z-10">
-                        <div class="w-12 h-12 bg-sports-blue/20 rounded flex items-center justify-center mb-6 text-sports-lightBlue">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        <div class="w-14 h-14 bg-sports-blue/30 rounded-xl flex items-center justify-center mb-6 text-sports-lightBlue border border-sports-lightBlue/20">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                         </div>
-                        <h3 class="font-heading font-black text-2xl uppercase italic mb-3">4. Consultoria de Performance</h3>
-                        <span class="inline-block bg-sports-lightBlue/20 text-sports-lightBlue font-bold text-xs px-2 py-1 rounded mb-4 font-mono">100% ONLINE</span>
-                        <p class="text-sports-gray text-sm leading-relaxed mb-8">
+                        <h3 class="font-heading font-black text-2xl lg:text-3xl uppercase italic mb-3 text-white">Consultoria de Performance Online</h3>
+                        <span class="inline-block bg-sports-lightBlue/20 text-sports-lightBlue text-[10px] px-3 py-1 rounded-sm mb-6 font-mono font-bold tracking-widest border border-sports-lightBlue/30">100% DIGITAL</span>
+                        <p class="text-sports-gray text-sm leading-relaxed mb-8 font-medium">
                             Planejamento de treino focado em atletas que precisam de uma periodização profissional para conciliar com seus treinos técnicos, com monitoramento de carga e evolução à distância.
                         </p>
                     </div>
-                    <button onclick="openICP('Consultoria Online')" class="relative z-10 w-full py-4 bg-white text-sports-bg font-bold uppercase tracking-wider text-sm hover:bg-sports-lightBlue hover:text-white transition-all">
+                    <button onclick="openICP('Consultoria Online')" class="relative z-10 w-full py-4 bg-white text-sports-bg font-black uppercase tracking-wider text-sm hover:bg-sports-lightBlue hover:text-white transition-all rounded-lg">
                         Iniciar Projeto
                     </button>
                 </div>
 
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- FOOTER -->
-        <footer class="border-t border-white/5 py-8 mt-12 text-center">
-            <div class="flex flex-col items-center justify-center gap-4">
-                <!-- Logo Type -->
-                <div class="font-heading font-black text-xl italic tracking-tighter">DAVI MOREIRA</div>
-                <p class="text-[10px] text-sports-gray font-mono uppercase tracking-[0.2em]">Slow Process. Solid Foundation. © 2026</p>
-            </div>
-        </footer>
+    <!-- FOOTER DA AGÊNCIA (BOOM AGÊNCIA) -->
+    <footer class="w-full border-t border-white/5 bg-sports-panel py-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center justify-center gap-2">
+            <span class="text-sports-gray text-xs font-mono font-bold uppercase tracking-widest">© 2026 Davi Moreira Performance</span>
+            <span class="text-[10px] text-white/40 uppercase tracking-[0.3em] mt-2">Built by <strong>Boom Agência</strong></span>
+        </div>
+    </footer>
 
-    </main>
-
-    <!-- MODAL ICP (QUALIFICAÇÃO PARA O WHATSAPP) -->
-    <div id="modal-backdrop" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4">
-        <div id="modal-panel" class="bg-sports-panel w-full max-w-md border border-white/10 shadow-2xl relative">
+    <!-- MODAL ICP (FILTRO PARA O WHATSAPP) -->
+    <div id="modal-backdrop" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[100] hidden flex items-center justify-center p-4">
+        <div id="modal-panel" class="bg-sports-panel w-full max-w-md rounded-2xl border border-white/10 shadow-2xl relative overflow-hidden">
             
-            <!-- Barra superior -->
-            <div class="h-2 w-full bg-sports-bg">
+            <div class="h-1.5 w-full bg-sports-bg">
                 <div id="progress-bar" class="h-full bg-sports-lightBlue transition-all duration-300 w-1/3"></div>
             </div>
 
-            <button onclick="closeICP()" class="absolute top-6 right-6 text-sports-gray hover:text-white z-10">✕</button>
+            <button onclick="closeICP()" class="absolute top-4 right-4 text-sports-gray hover:text-white z-10 p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
             
             <div class="p-8 pt-10 min-h-[400px] flex flex-col justify-center">
                 
-                <!-- Header do Modal -->
-                <div class="mb-8">
-                    <span id="service-badge" class="text-[10px] text-sports-lightBlue font-mono uppercase tracking-widest border border-sports-lightBlue/30 px-2 py-1 bg-sports-lightBlue/10 mb-4 inline-block">
+                <div class="mb-8 text-center">
+                    <span id="service-badge" class="text-[10px] text-sports-lightBlue font-mono font-bold uppercase tracking-widest border border-sports-lightBlue/30 px-3 py-1 bg-sports-lightBlue/10 rounded-sm">
                         Serviço Selecionado
                     </span>
                 </div>
 
                 <!-- STEP 1: NÍVEL -->
                 <div id="step-1">
-                    <h3 class="font-heading font-black text-2xl uppercase italic mb-6">Qual seu nível de treinamento atual?</h3>
+                    <h3 class="font-heading font-black text-2xl uppercase italic mb-6 text-center text-white">Nível de Treinamento?</h3>
                     <div class="space-y-3">
-                        <button onclick="nextStep(1, 'Iniciante')" class="w-full p-4 border border-white/10 bg-sports-bg text-left hover:border-sports-lightBlue hover:bg-sports-lightBlue/10 transition-colors font-medium text-sm">
+                        <button onclick="nextStep(1, 'Iniciante / Sedentário')" class="w-full p-4 border border-white/10 bg-sports-bg rounded-xl text-left hover:border-sports-lightBlue text-white font-medium transition-all">
                             Sou iniciante / Sedentário
                         </button>
-                        <button onclick="nextStep(1, 'Intermediário/Avançado')" class="w-full p-4 border border-white/10 bg-sports-bg text-left hover:border-sports-lightBlue hover:bg-sports-lightBlue/10 transition-colors font-medium text-sm">
+                        <button onclick="nextStep(1, 'Intermediário / Já treino')" class="w-full p-4 border border-white/10 bg-sports-bg rounded-xl text-left hover:border-sports-lightBlue text-white font-medium transition-all">
                             Já treino regularmente
                         </button>
-                        <button onclick="nextStep(1, 'Atleta Profissional/Amador')" class="w-full p-4 border border-white/10 bg-sports-bg text-left hover:border-sports-lightBlue hover:bg-sports-lightBlue/10 transition-colors font-bold text-sports-lightBlue text-sm">
-                            Sou atleta (Preciso de Alta Performance)
+                        <button onclick="nextStep(1, 'Atleta (Alta Performance)')" class="w-full p-4 border border-sports-lightBlue/30 bg-sports-lightBlue/5 rounded-xl text-left hover:border-sports-lightBlue text-sports-lightBlue font-bold transition-all">
+                            Sou atleta (Busco Alta Performance)
                         </button>
                     </div>
                 </div>
 
                 <!-- STEP 2: OBJETIVO -->
                 <div id="step-2" class="hidden">
-                    <h3 class="font-heading font-black text-2xl uppercase italic mb-6">Qual sua prioridade máxima?</h3>
+                    <h3 class="font-heading font-black text-2xl uppercase italic mb-6 text-center text-white">Prioridade Máxima?</h3>
                     <div class="space-y-3">
-                        <button onclick="finishICP('Ganho de Força e Performance')" class="w-full p-4 border border-white/10 bg-sports-bg text-left hover:border-sports-lightBlue hover:bg-sports-lightBlue/10 transition-colors font-medium text-sm">
+                        <button onclick="finishICP('Força e Performance')" class="w-full p-4 border border-white/10 bg-sports-bg rounded-xl text-left hover:border-sports-lightBlue text-white font-medium transition-all">
                             Ganho de Força e Performance
                         </button>
-                        <button onclick="finishICP('Estética Corporal / Emagrecimento')" class="w-full p-4 border border-white/10 bg-sports-bg text-left hover:border-sports-lightBlue hover:bg-sports-lightBlue/10 transition-colors font-medium text-sm">
+                        <button onclick="finishICP('Estética Corporal')" class="w-full p-4 border border-white/10 bg-sports-bg rounded-xl text-left hover:border-sports-lightBlue text-white font-medium transition-all">
                             Estética Corporal / Emagrecimento
                         </button>
-                        <button onclick="finishICP('Recuperação de Lesão')" class="w-full p-4 border border-white/10 bg-sports-bg text-left hover:border-red-500 hover:bg-red-500/10 transition-colors font-medium text-sm text-red-400">
+                        <button onclick="finishICP('Recuperação de Lesão')" class="w-full p-4 border border-white/10 bg-sports-bg rounded-xl text-left hover:border-red-500 text-red-400 font-medium transition-all">
                             Recuperação de Lesão / Dor
                         </button>
                     </div>
                 </div>
 
-                <!-- STEP FINAL: WPP -->
+                <!-- STEP FINAL -->
                 <div id="step-3" class="hidden text-center">
-                    <div class="w-16 h-16 bg-sports-blue/20 border border-sports-lightBlue text-sports-lightBlue rounded-full flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                    <div class="w-16 h-16 bg-sports-lightBlue/20 border border-sports-lightBlue text-sports-lightBlue rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
                     </div>
-                    <h3 class="font-heading font-black text-2xl uppercase italic mb-2">Diagnóstico Criado</h3>
-                    <p class="text-sports-gray text-sm mb-8">Estou pronto para montar sua periodização.</p>
+                    <h3 class="font-heading font-black text-2xl uppercase italic mb-2 text-white">Diagnóstico Criado</h3>
+                    <p class="text-sports-gray text-sm mb-8">O Professor Davi está aguardando sua mensagem.</p>
                     
-                    <a id="btn-wpp" href="#" target="_blank" class="block w-full bg-white text-sports-bg font-heading font-black italic uppercase py-5 text-lg hover:bg-sports-lightBlue hover:text-white transition-colors">
-                        Falar com Davi
+                    <a id="btn-wpp" href="#" target="_blank" class="block w-full bg-sports-lightBlue hover:bg-blue-600 text-white font-heading font-black italic uppercase py-5 rounded-xl text-lg shadow-xl shadow-sports-lightBlue/20 transform hover:-translate-y-1 transition-all">
+                        Enviar para o WhatsApp
                     </a>
                 </div>
 
@@ -323,7 +318,6 @@
     <!-- LOGIC SCRIPT -->
     <script>
         const modal = document.getElementById('modal-backdrop');
-        const modalPanel = document.getElementById('modal-panel');
         const badge = document.getElementById('service-badge');
         const progress = document.getElementById('progress-bar');
         
@@ -337,24 +331,18 @@
             leadData.servico = serviceName;
             badge.innerText = serviceName;
             
-            // Reset Modal View
             document.getElementById('step-1').classList.remove('hidden');
             document.getElementById('step-2').classList.add('hidden');
             document.getElementById('step-3').classList.add('hidden');
             progress.style.width = '33%';
 
             modal.classList.remove('hidden');
-            // Trigger animation
-            setTimeout(() => {
-                modal.classList.add('modal-active');
-            }, 10);
+            setTimeout(() => modal.classList.add('modal-active'), 10);
         }
 
         function closeICP() {
             modal.classList.remove('modal-active');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300);
+            setTimeout(() => modal.classList.add('hidden'), 300);
         }
 
         function nextStep(stepNum, val) {
@@ -372,17 +360,13 @@
             document.getElementById('step-3').classList.remove('hidden');
             progress.style.width = '100%';
 
-            // CONSTRÓI A MENSAGEM DO WHATSAPP (Número: 21 98987-3831)
             const telefone = "5521989873831";
-            const texto = `Fala Davi! Acessei o seu site e tenho interesse nos seus treinos.\n\n*Serviço:* ${leadData.servico}\n*Meu nível:* ${leadData.nivel}\n*Foco principal:* ${leadData.objetivo}\n\nComo podemos começar?`;
+            const texto = `Fala Davi! Acessei o seu site e tenho interesse nos treinos.\n\n*Serviço:* ${leadData.servico}\n*Meu nível:* ${leadData.nivel}\n*Foco principal:* ${leadData.objetivo}\n\nComo podemos começar?`;
             
             document.getElementById('btn-wpp').href = `https://wa.me/${telefone}?text=${encodeURIComponent(texto)}`;
         }
 
-        // Fechar ao clicar fora
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeICP();
-        });
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeICP(); });
     </script>
 </body>
 </html>
