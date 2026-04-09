@@ -211,7 +211,7 @@ function addToCart(id) {
         }
     }
     
-    cart.push({...product, selectedSize: size, cartId: Date.now() + Math.random()});
+    cart.push({...product, selectedSize: size, cartId: (Date.now() + Math.random()).toString()});
     updateCartUI();
     document.getElementById('cart-modal').classList.remove('hidden');
 }
